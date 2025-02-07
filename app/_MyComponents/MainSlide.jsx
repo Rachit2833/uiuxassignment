@@ -1,17 +1,15 @@
 'use client'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Battery, Ellipsis, List, MessageCircle, Plus, Trash2 } from "lucide-react";
-import InformationSlide from "./InformationSlide";
 import { Button } from "@/components/ui/button";
-import {Popover,PopoverContent,PopoverTrigger,} from "@/components/ui/popover"
-import PopOverMainContent from "./PopOverMainContent.jsx";
-import PopOverWrapper from "./PopOverWrapper";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
+import { List, Plus } from "lucide-react";
 import { useState } from "react";
-import ToDoListForm from "./ToDoListForm";
-import SlideHeader from "./SlideHeader";
-import { MyDropDownMenu } from "./MyDropDownMenu";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { useFormStatus } from "react-dom";
 import DeleteForm from "./DelteForm";
+import InformationSlide from "./InformationSlide";
+import PopOverWrapper from "./PopOverWrapper";
+import SlideHeader from "./SlideHeader";
+import ToDoListForm from "./ToDoListForm";
 
 
 
@@ -28,7 +26,6 @@ function MainSlide({data,users}) {
        colors.push(e.task)
      }
    })
-   console.log(colors,"color");
 
 
    return (
@@ -64,7 +61,7 @@ function MainSlide({data,users}) {
                      users={users}
                      options={ModelOptionsSub}
                   >
-                     <Button type="submit">Save</Button>
+                    <SaveButton />
                   </PopOverWrapper>
               </Popover>
                <h3 className="  mx-2  tracking-wider">Add a card</h3>
@@ -75,3 +72,16 @@ function MainSlide({data,users}) {
 }
 
 export default MainSlide
+export function SaveButton() {
+   const status = useFormStatus();
+   console.log(status,"status");
+   return (
+      <Button className="" disabled={status.pending} type="submit">
+         {status.pending ? <span className="animate-spin  inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></span> :<span>Save</span>}
+         {/* <span> Save</span> */}
+        </Button>
+   )
+}
+
+
+

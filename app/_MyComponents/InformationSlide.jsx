@@ -5,6 +5,7 @@ import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import { deleteMessage, updateMessage } from "../_lib/server";
 import { Button } from "@/components/ui/button";
+import { useFormStatus } from "react-dom";
 
 function InformationSlide({ data, phaseId }) {
    const [title, setTitle] = useState(data.content);
@@ -85,7 +86,7 @@ function InformationSlide({ data, phaseId }) {
                <div className="flex justify-between items-center">
                   <div className="flex gap-2 items-center">
                      <form onSubmit={(e) => { e.preventDefault(); deleteMessage(phaseId, data?._id, data?.task); }}>
-                        <Button type="submit"><Trash2 /></Button>
+                        <DeleteButton />
                      </form>
                   </div>
                   {data.type === "task" && (
@@ -110,3 +111,15 @@ function InformationSlide({ data, phaseId }) {
 }
 
 export default InformationSlide;
+function DeleteButton() {
+const status = useFormStatus()
+   return (
+      <Button className="" disabled={status.pending} type="submit">
+         {status.pending ? <span className="animate-spin  inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></span> : <Trash2 />}
+         {/* <span> Save</span> */}
+      </Button>
+   )
+}
+
+
+

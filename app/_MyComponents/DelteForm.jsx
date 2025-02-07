@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { deletePhase } from "../_lib/server";
+import { useFormStatus } from "react-dom";
 
 export default function DeleteForm({data}) {
    const [open, setOpen] = useState(false);
@@ -35,15 +36,18 @@ export default function DeleteForm({data}) {
                   Cancel
                </Button>
                <form action={() => deletePhase(phaseId,messageArray,taskArray)}>
-                  <Button variant="destructive" onClick={() => {
-                     console.log("Deleted")
-                     setOpen(false)
-                  }}>
-                     Continue
-                  </Button>
+                 <DeleteButton />
               </form>
             </DialogFooter>
          </DialogContent>
       </Dialog>
    );
+}
+function DeleteButton() {
+const status = useFormStatus()
+   return (
+      <Button variant="destructive" className="" disabled={status.pending} type="submit">
+         {status.pending ? <span className="animate-spin  inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></span> : <span>Continue</span>}
+      </Button>
+   )
 }
