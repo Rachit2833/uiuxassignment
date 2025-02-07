@@ -13,7 +13,9 @@ import DialogForm from "./_MyComponents/DialogForm";
 import { MyAlert } from "./_MyComponents/MyAlert";
 
 export default async function Home() {
-  const projectDetails = await fetch("http://localhost:2833/projects")
+  const projectDetails = await fetch(
+    "https://backend-1-sg24.onrender.com/projects"
+  );
   const data = await projectDetails.json()
   const userData = data[0].peopleWorkingOn;
 

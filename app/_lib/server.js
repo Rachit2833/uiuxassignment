@@ -18,7 +18,7 @@ export async function addMessage(formData, phaseId) {
 
     console.log(formDataObject, phaseId);
 
-    const response = await fetch("http://localhost:2833/messages", {
+    const response = await fetch("https://backend-1-sg24.onrender.com/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Ensure the content type is set to JSON
@@ -42,7 +42,7 @@ export async function addTodoList(formData, phaseId) {
    const task = formData.get("Task");
    console.log(task); // Should log the task value from formData
 
-   const res = await fetch(`http://localhost:2833/phases/${phaseId}/todos`, {
+   const res = await fetch(`https://backend-1-sg24.onrender.com/phases/${phaseId}/todos`, {
      method: "POST",
      headers: {
        "Content-Type": "application/json", // Ensure JSON is properly parsed
@@ -63,7 +63,7 @@ export async function addTodoList(formData, phaseId) {
 export async function deleteToDoItem(phaseId,id) {
   try {
     const res = await fetch(
-      `http://localhost:2833/phases/${phaseId}/todos/${id}`,
+      `https://backend-1-sg24.onrender.com/phases/${phaseId}/todos/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -84,7 +84,7 @@ export async function addNewPhase(formData){
 
      console.log(name); // Should log the task value from formData
 
-     const res = await fetch(`http://localhost:2833/phases`, {
+     const res = await fetch(`https://backend-1-sg24.onrender.com/phases`, {
        method: "POST",
        headers: {
          "Content-Type": "application/json", // Ensure JSON is properly parsed
@@ -105,7 +105,7 @@ export async function addNewPhase(formData){
 export async function deleteMessage(phaseId,messageId,taskId) {
     try {
       console.log(messageId,phaseId,taskId);
-       const data = await fetch("http://localhost:2833/message", {
+       const data = await fetch("https://backend-1-sg24.onrender.com/message", {
          method: "DELETE",
          body: JSON.stringify({
            messageId,
@@ -125,7 +125,7 @@ export async function deleteMessage(phaseId,messageId,taskId) {
 export async function updatePhaseHeader(phaseId,title,content){
   try {
     console.log(phaseId, title, content);
-     const data = await fetch("http://localhost:2833/phase/header",{
+     const data = await fetch("https://backend-1-sg24.onrender.com/phase/header",{
       method:"POST",
       body:JSON.stringify({
         title,
@@ -143,7 +143,7 @@ export async function updatePhaseHeader(phaseId,title,content){
 export async function updateMessage(phaseId, title, description) {
   try {
     console.log(phaseId,title,description);
-    const data = await fetch("http://localhost:2833/message", {
+    const data = await fetch("https://backend-1-sg24.onrender.com/message", {
       method: "PATCH",
       body: JSON.stringify({
         title,
@@ -161,7 +161,7 @@ export async function updateMessage(phaseId, title, description) {
 export async function deletePhase(phaseId,messArray,taskArray) {
   try {
     console.log(phaseId,messArray,taskArray,"vgvjv");
-    const data = await fetch("http://localhost:2833/phase", {
+    const data = await fetch("https://backend-1-sg24.onrender.com/phase", {
       method: "DELETE",
       body: JSON.stringify({
         phaseId,

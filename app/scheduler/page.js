@@ -5,9 +5,11 @@ import Schedule from "../_MyComponents/Schedule"
 
 
 async function page() {
-   const projectDetails = await fetch("http://localhost:2833/projects");
+   const projectDetails = await fetch(
+     "https://backend-1-sg24.onrender.com/projects"
+   );
    const projectdata = await projectDetails.json();
-   const taskDetails = await fetch("http://localhost:2833/tasks")
+   const taskDetails = await fetch("https://backend-1-sg24.onrender.com/tasks");
    const data = await taskDetails.json()
 
    return (
