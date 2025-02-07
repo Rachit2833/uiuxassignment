@@ -1,0 +1,112 @@
+"use client";
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Trash2 } from "lucide-react";
+import Image from "next/image";
+import { deleteMessage, updateMessage } from "../_lib/server";
+import { Button } from "@/components/ui/button";
+
+function InformationSlide({ data, phaseId }) {
+   const [title, setTitle] = useState(data.content);
+   const [content, setContent] = useState(data.description || "No Description"); // Added a state for content
+   const [isEditing, setIsEditing] = useState(false);
+   const [isEditingContent, setIsEditingContent] = useState(false);
+
+   const handleTitleBlur = () => {
+      setIsEditing(false);
+   };
+
+   const handleContentBlur = () => {
+      setIsEditingContent(false);
+   };
+
+   const generateColorFromString = (str, index) => {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+         hash = str.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      // Introduce index variation to spread out colors
+      return `hsl(${(Math.abs(hash) + index * 50) % 360}, 80%, 80%)`;
+   };
+
+   // Generate color based on data content
+   const backgroundColor = data.task ? generateColorFromString(data.task || "default", 0) : "white";
+  console.log(data._id,"vjgvjhv");
+   return (
+      <Card>
+         <div className="rounded-lg" style={{ backgroundColor }}>
+            <CardHeader className="py-4">
+               {isEditing ? (
+                  <form onSubmit={(e) => { e.preventDefault(); setIsEditing(false); }}>
+                     <textarea
+                        cols={20}
+                        rows={10}
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        onBlur={()=>{
+                           handleTitleBlur()
+                           updateMessage(data._id,title,content)
+                        }}
+                        autoFocus
+                        className="w-full border-none outline-none bg-transparent text-lg font-semibold"
+                     />
+                  </form>
+               ) : (
+                  <CardTitle
+                     onClick={() => setIsEditing(true)}
+                     className="cursor-pointer select-none"
+                  >
+                     {title || "This Is a New Header"}
+                  </CardTitle>
+               )}
+            </CardHeader>
+            <CardContent>
+               {isEditingContent ? (
+                  <textarea
+                     rows={6}
+                     value={content}
+                     onChange={(e) => setContent(e.target.value)}
+                     onBlur={() => {
+                        handleContentBlur()
+                        updateMessage(data._id, title, content)
+                     }}
+                     autoFocus
+                     className="w-full p-2 border-none bg-transparent text-base"
+                  />
+               ) : (
+                  <pre
+                     onClick={() => setIsEditingContent(true)}
+                     className="cursor-pointer w-full select-none leading-6 whitespace-pre-wrap break-words overflow-hidden"
+                  >
+                     {content}
+                  </pre>
+               )}
+
+               <div className="flex justify-between items-center">
+                  <div className="flex gap-2 items-center">
+                     <form onSubmit={(e) => { e.preventDefault(); deleteMessage(phaseId, data?._id, data?.task); }}>
+                        <Button type="submit"><Trash2 /></Button>
+                     </form>
+                  </div>
+                  {data.type === "task" && (
+                     <div className="flex items-center">
+                        {data.assignedTo.map((user, i) => (
+                           <Image
+                              key={i}
+                              width={36}
+                              height={36}
+                              className="w-12 h-12 rounded-full border-2 border-white -ml-4 first:ml-0"
+                              src={user.profilePicture}
+                              alt="profile picture of a user"
+                           />
+                        ))}
+                     </div>
+                  )}
+               </div>
+            </CardContent>
+         </div>
+      </Card>
+   );
+}
+
+export default InformationSlide;
