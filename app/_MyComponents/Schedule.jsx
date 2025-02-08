@@ -73,7 +73,7 @@ function Schedule({ data, users }) {
                            {newUserTasks.map((t, index) => {
                               const taskStart = parseISO(t.startDate);
                               const taskEnd = parseISO(t.endDate);
-                              const weekEnd = addDays(currentWeekStart, 6);
+                              const weekEnd = addDays(currentWeekStart, 7);
 
                               if (isAfter(taskStart, weekEnd) || isBefore(taskEnd, currentWeekStart)) {
                                  return null;
