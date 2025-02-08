@@ -1,22 +1,16 @@
 'use client'
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { List, Plus } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import DeleteForm from "./DelteForm";
-import InformationSlide from "./InformationSlide";
 import PopOverWrapper from "./PopOverWrapper";
-import SlideHeader from "./SlideHeader";
 import ToDoListForm from "./ToDoListForm";
-import { closestCorners, DndContext } from "@dnd-kit/core";
-import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import DNDWrapper from "./DNDWrapper";
 
-
-
-
+const DNDWrapper = dynamic(() => import("./DNDWrapper"), { ssr: false });
 const ModelOptionsSub = [
    { label: "Title", inputType: "text" },
    { label: "Status", inputType: "select", options: ["Open", "In Progress", "Completed"] },

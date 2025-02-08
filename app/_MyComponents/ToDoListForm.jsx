@@ -38,7 +38,7 @@ function ToDoListForm({phaseId,tasks  }) {
 export default ToDoListForm;
 export function SaveButton({info,variant}) {
    const status = useFormStatus();
-   console.log(status,"status");
+
    return (
       <Button variant={variant||"default"} className="" disabled={status.pending} type="submit">
          {status.pending ? <span className="animate-spin  inline-block w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full"></span> :<span>{info}</span>}

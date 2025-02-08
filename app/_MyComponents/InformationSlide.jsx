@@ -9,8 +9,8 @@ import { useFormStatus } from "react-dom";
 import { useSortable } from "@dnd-kit/sortable";
 import {CSS}from "@dnd-kit/utilities"
 function InformationSlide({id, data, phaseId }) {
-   const [title, setTitle] = useState(data.content);
-   const [content, setContent] = useState(data.description || "No Description"); // Added a state for content
+   const [title, setTitle] = useState(data?.content);
+   const [content, setContent] = useState(data?.description || "No Description"); // Added a state for content
    const [isEditing, setIsEditing] = useState(false);
    const [isEditingContent, setIsEditingContent] = useState(false);
 
