@@ -10,7 +10,6 @@ function SlideHeader({ data }) {
    const [content, setContent] = useState(data?.header?.content || "This Is a new Header");
    const [isEditingTitle, setIsEditingTitle] = useState(false);
    const [isEditingContent, setIsEditingContent] = useState(false);
-   console.log(data.messages,"message");
    const handleTitleBlur = () => {
       setIsEditingTitle(false);
    };

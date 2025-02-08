@@ -20,14 +20,13 @@ const ModelOptionsSub = [
 ];
 function MainSlide({data,users}) {
    const [isPopUpOpen, setIsPopUpOpen]=useState(false)
+   
    const colors =[]
     data.messages.forEach((e,i)=>{
      if(e.type==="task"){
        colors.push(e.task)
      }
    })
-
-
    return (
       <Card className="min-w-[25rem] max-h-fit ">
          <CardHeader className="  ">

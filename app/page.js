@@ -1,15 +1,6 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Battery, Ellipsis, MessageCircle, Plus } from "lucide-react";
-import Image from "next/image";
-import InformationSlide from "./_MyComponents/InformationSlide";
-import { Button } from "@/components/ui/button";
-import MainSlide from "./_MyComponents/MainSlide";
-import { project } from "./_lib/project";
-import { DialogTrigger } from "@radix-ui/react-dialog";
-import { Dialog } from "@/components/ui/dialog";
-import DialogOpener from "./_MyComponents/DialogOpener";
-import AddPhaseForm from "./_MyComponents/AddPhaseForm";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import DialogForm from "./_MyComponents/DialogForm";
+import MainSlide from "./_MyComponents/MainSlide";
 import { MyAlert } from "./_MyComponents/MyAlert";
 
 export default async function Home() {

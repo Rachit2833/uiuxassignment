@@ -32,7 +32,6 @@ function InformationSlide({ data, phaseId }) {
 
    // Generate color based on data content
    const backgroundColor = data.task ? generateColorFromString(data.task || "default", 0) : "white";
-  console.log(data._id,"vjgvjhv");
    return (
       <Card>
          <div className="rounded-lg" style={{ backgroundColor }}>

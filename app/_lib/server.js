@@ -32,6 +32,7 @@ export async function addMessage(formData, phaseId) {
     const data = await response.json();
     console.log(data);
     revalidatePath("/"); 
+     revalidatePath("/scheduler"); 
   } catch (error) {
     console.error(error);
   }
@@ -116,6 +117,7 @@ export async function deleteMessage(phaseId,messageId,taskId) {
          },
        });
         revalidatePath("/");
+        revalidatePath("/scheduler"); 
     } catch (error) {
       console.error(error);
     }

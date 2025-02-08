@@ -16,7 +16,6 @@ export default function DeleteForm({data}) {
       taskArray.push(m.task)
      }
    })
-   console.log(phaseId,messageArray,"asa sn");
    return (
       <Dialog open={open} onOpenChange={setOpen}>
          <Button variant="destructive" className="bg-black" onClick={() => setOpen(true)}>
