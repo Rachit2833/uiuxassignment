@@ -6,8 +6,9 @@ import Image from "next/image";
 import { deleteMessage, updateMessage } from "../_lib/server";
 import { Button } from "@/components/ui/button";
 import { useFormStatus } from "react-dom";
-
-function InformationSlide({ data, phaseId }) {
+import { useSortable } from "@dnd-kit/sortable";
+import {CSS}from "@dnd-kit/utilities"
+function InformationSlide({id, data, phaseId }) {
    const [title, setTitle] = useState(data.content);
    const [content, setContent] = useState(data.description || "No Description"); // Added a state for content
    const [isEditing, setIsEditing] = useState(false);
@@ -16,6 +17,11 @@ function InformationSlide({ data, phaseId }) {
    const handleTitleBlur = () => {
       setIsEditing(false);
    };
+   const  {attributes,listeners,setNodeRef,transform,transition}=useSortable({id})
+   const style={
+      transition,
+      transform:CSS.Transform.toString(transform)
+   }
 
    const handleContentBlur = () => {
       setIsEditingContent(false);
@@ -32,8 +38,10 @@ function InformationSlide({ data, phaseId }) {
 
    // Generate color based on data content
    const backgroundColor = data.task ? generateColorFromString(data.task || "default", 0) : "white";
+
    return (
-      <Card>
+      <div ref={setNodeRef} {...attributes} {...listeners} style={style} >
+      <Card >
          <div className="rounded-lg" style={{ backgroundColor }}>
             <CardHeader className="py-4">
                {isEditing ? (
@@ -106,6 +114,7 @@ function InformationSlide({ data, phaseId }) {
             </CardContent>
          </div>
       </Card>
+      </div>
    );
 }
 

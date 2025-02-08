@@ -10,6 +10,9 @@ import InformationSlide from "./InformationSlide";
 import PopOverWrapper from "./PopOverWrapper";
 import SlideHeader from "./SlideHeader";
 import ToDoListForm from "./ToDoListForm";
+import { closestCorners, DndContext } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import DNDWrapper from "./DNDWrapper";
 
 
 
@@ -20,15 +23,17 @@ const ModelOptionsSub = [
 ];
 function MainSlide({data,users}) {
    const [isPopUpOpen, setIsPopUpOpen]=useState(false)
-   
    const colors =[]
     data.messages.forEach((e,i)=>{
      if(e.type==="task"){
        colors.push(e.task)
      }
    })
+
+
    return (
-      <Card className="min-w-[25rem] max-h-fit ">
+
+      <Card className="min-w-[30rem]  max-h-fit ">
          <CardHeader className="  ">
             <CardTitle className="flex justify-between align-middle ">
               {data.name}
@@ -44,10 +49,7 @@ function MainSlide({data,users}) {
             </CardTitle>
             <CardTitle></CardTitle>
          </CardHeader>
-         <CardContent className=" flex flex-col gap-2">
-             <SlideHeader data={data} />
-             {data.messages.map((e,i)=><InformationSlide phaseId={data._id} data={e} key={i}  />)}
-         </CardContent>
+         <DNDWrapper data={data} />
          <CardFooter className="flex justify-between">
             <div className="flex justify-center align-middle items-center">
                <Popover open={isPopUpOpen} onOpenChange={setIsPopUpOpen}>
